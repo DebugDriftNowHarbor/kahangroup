@@ -1,0 +1,6 @@
+{
+  "name": "منظومه زیرساخت‌های هوشمند مدیریت صنایع",
+  "description": "هلدینگ فناوری و معماری زیست‌بوم‌های هوشمند مدیریت یکپارچه برای صنایع اصیل و سنتی",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

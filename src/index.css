@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Vazirmatn", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-latin: "Space Grotesk", "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Dark surface (شبانه سینمایی) ─────────────────────── */
+  --color-ink: #05060b;
+  --color-ink-soft: #0a0c14;
+  --color-night: #10131f;
+  --color-haze: #171b2b;
+
+  /* ── Light surface (روشن ادیتوریال) ───────────────────── */
+  --color-paper: #f6f2ea;
+  --color-paper-deep: #ede8dd;
+  --color-parch: #fbf9f4;
+
+  /* ── Text ─────────────────────────────────────────────── */
+  --color-milk: #f2efe8;
+  --color-fog: #a7a3ba;
+  --color-dusk: #6d6982;
+  --color-void: #17161d;
+  --color-clay: #57524a;
+  --color-sand: #8a8378;
+
+  /* ── Aurora accents (تیره) ────────────────────────────── */
+  --color-violet: #8b7cff;
+  --color-violet-deep: #6a5cff;
+  --color-cyan: #4dd8ff;
+  --color-mint: #42f0b5;
+  --color-peach: #ffb37a;
+  --color-rose: #ff8fb7;
+
+  /* ── Warm accents (روشن) ──────────────────────────────── */
+  --color-terra: #c25e2e;
+  --color-terra-soft: #e0854f;
+  --color-sage: #4e7d5f;
+  --color-gold: #b98a2f;
+
+  --shadow-glow-violet: 0 0 60px -12px rgba(139, 124, 255, 0.45);
+  --shadow-card-dark: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  --shadow-card-light: 0 24px 48px -28px rgba(35, 30, 20, 0.25);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    background-color: #05060b;
+  }
+
+  body {
+    font-family: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+    color: #f2efe8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: rgba(139, 124, 255, 0.35);
+    color: #f2efe8;
+  }
+
+  :focus-visible {
+    outline: 2px solid #8b7cff;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  input,
+  textarea {
+    user-select: text;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   Utilities
+   ══════════════════════════════════════════════════════════ */
+
+/* گرادیان آئورا روی متن */
+.text-aurora {
+  background: linear-gradient(100deg, #8b7cff 0%, #4dd8ff 48%, #42f0b5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-aurora-warm {
+  background: linear-gradient(100deg, #c25e2e 0%, #e0854f 55%, #b98a2f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* حباب‌های نور پس‌زمینه */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* بافت نویز فیلم */
+.noise-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+/* خطوط شبکه محو */
+.grid-lines {
+  background-image:
+    linear-gradient(to left, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 88px 88px;
+}
+
+.grid-lines-light {
+  background-image:
+    linear-gradient(to left, rgba(30, 25, 15, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 25, 15, 0.05) 1px, transparent 1px);
+  background-size: 88px 88px;
+}
+
+/* کارت شیشه‌ای تیره */
+.glass-dark {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* کارت روشن با لبه نرم */
+.paper-card {
+  background: #fbf9f4;
+  border: 1px solid rgba(35, 30, 20, 0.08);
+  box-shadow: 0 24px 48px -28px rgba(35, 30, 20, 0.25);
+}
+
+/* قاب گرادیانی */
+.gradient-frame {
+  position: relative;
+}
+.gradient-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, rgba(139, 124, 255, 0.55), rgba(77, 216, 255, 0.25) 45%, rgba(66, 240, 181, 0.4));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* مارکی بی‌نهایت — حرکت راست‌به‌چپِ محتوا برای حس RTL */
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 36s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* شناوری نرم حباب‌ها */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(4%, -6%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-5%, 4%, 0) scale(0.95);
+  }
+}
+.drift-slow {
+  animation: drift 16s ease-in-out infinite;
+}
+.drift-slower {
+  animation: drift 22s ease-in-out infinite reverse;
+}
+
+/* درخشش نقطه وضعیت */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* اسکرول‌بار سفارشی */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05060b;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6a5cff, #42f0b5);
+  border-radius: 8px;
+  border: 2px solid #05060b;
+}
+
+.architectural-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.architectural-scroll::-webkit-scrollbar-thumb {
+  background: rgba(139, 124, 255, 0.4);
+  border: none;
+  border-radius: 4px;
+}
+
+/* حالت کاهش حرکت */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track,
+  .drift-slow,
+  .drift-slower,
+  .pulse-dot {
+    animation: none;
+  }
+}
